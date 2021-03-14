@@ -96,12 +96,12 @@ gulp.task('watch', function() {
 		//proxy: url.... (http or vhost)
 		server: './output'
 	});
-	gulp.watch(src.js, ['js']);
-	gulp.watch(src.img, ['img']);
-	gulp.watch(src.sass, ['sass']);
+	gulp.watch(src.js, gulp.series('js'));
+	gulp.watch(src.img, gulp.series('img'));
+	gulp.watch(src.sass, gulp.series('sass'));
 	gulp.watch(output.html).on('change', browserSync.reload);
 });
 
 // Default
 
-gulp.task('default', ['watch', 'sass', 'js', 'img']);
+gulp.task('default', gulp.series('watch', 'sass', 'js', 'img'));
